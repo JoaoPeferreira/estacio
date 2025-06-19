@@ -51,11 +51,31 @@
 <hr>
 <section class="card card-body">
     <h3>Dashboard</h3>
-</section>
+    <div id="frase">
 
+    </div>
+</section>
+<script> 
+    const divFrase = document.getElementById('frase')
+    let data
+    async function fetchFrase(){ 
+        const Frase = await fetch('https://api.chucknorris.io/jokes/random')
+        .then(res=> res.json())
+        .then(json => data = json)
+        renderFrase()
+    } 
+        function renderFrase() {
+            divFrase.innerHTML = `
+            <img src="${data.icon_url}" />
+            <p>${data.value}<p/>
+            `;
+        }
+    fetchFrase()
+</script>
  
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 <script>
+
   const savedMode = localStorage.getItem('darkMode');
   if (savedMode === 'enabled') {
     document.body.classList.add('dark-mode');
